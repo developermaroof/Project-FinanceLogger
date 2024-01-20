@@ -1,15 +1,7 @@
 import { Invoice } from "./classes/Invoice.js";
-
-const invOne = new Invoice("Maroof", "Work on a website", 400);
-const invTwo = new Invoice("Developer", "Work on a website", 500);
-
-let invoices: Invoice[] = [];
-invoices.push(invOne);
-invoices.push(invTwo);
-
-invoices.forEach((inv) => {
-  console.log(inv.client, inv.amount, inv.format);
-});
+import { ListTemplate } from "./classes/ListTemplate.js";
+import { Payment } from "./classes/Payment.js";
+import { HasFormatter } from "./interfaces/HasFormatter.js";
 
 // inputs
 const form = document.querySelector(".new-item-form") as HTMLFormElement;
@@ -18,8 +10,26 @@ const tofrom = document.querySelector("#tofrom") as HTMLInputElement;
 const details = document.querySelector("#details") as HTMLSelectElement;
 const amount = document.querySelector("#amount") as HTMLSelectElement;
 
+const ul = document.querySelector("ul")!;
+const list = new ListTemplate(ul);
+
 form.addEventListener("submit", (e: Event) => {
   e.preventDefault();
 
-  console.log(type.value, tofrom.value, details.value, amount.value);
+  const amountValue: number = parseFloat(amount.value);
+
+  if (isNaN(amountValue)) {
+    console.error("Please enter a valid number for the amount.");
+    return;
+  }
+
+  let doc: HasFormatter;
+
+  if (type.value === "invoice") {
+    doc = new Invoice(tofrom.value, details.value, amountValue);
+  } else {
+    doc = new Payment(tofrom.value, details.value, amountValue);
+  }
+
+  list.render(doc, type.value, "end");
 });
