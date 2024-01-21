@@ -1,6 +1,6 @@
-import { Invoice } from "./classes/Invoice.js";
-import { ListTemplate } from "./classes/ListTemplate.js";
-import { Payment } from "./classes/Payment.js";
+import { Invoice } from "./Invoice.js";
+import { ListTemplate } from "./ListTemplate.js";
+import { Payment } from "./Payment.js";
 // inputs
 const form = document.querySelector(".new-item-form");
 const type = document.querySelector("#type");

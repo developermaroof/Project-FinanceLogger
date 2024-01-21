@@ -1,4 +1,4 @@
-import { HasFormatter } from "../interfaces/HasFormatter.js";
+import { HasFormatter } from "./HasFormatter.js";
 
 export class ListTemplate {
   constructor(private container: HTMLUListElement) {}
